@@ -17,7 +17,7 @@ public class Angle {
         this.inputString = inputString;
         this.angleType = angleType;
 
-        if (angleType == AngleType.GRAD || angleType == AngleType.RAD) {
+        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DD) {
             inputString = inputString.replace(',','.');
             value = parseDouble(inputString);
         }
