@@ -1,17 +1,15 @@
 package pl.strojecki;
 
-import lombok.ToString;
-
+import java.util.Formatter;
 
 import static java.lang.Double.parseDouble;
 
-@ToString
 public class Angle {
 
-    @ToString.Exclude
     private String inputString;
     private double value;
     private AngleType angleType;
+
 
     public Angle(String inputString, AngleType angleType) {
         this.inputString = inputString;
@@ -58,5 +56,13 @@ public class Angle {
 
     public AngleType getAngleType() {
         return angleType;
+    }
+
+
+    @Override
+    public String toString() {
+        Formatter formatter = new Formatter();
+        formatter.format("Angle{value=%.4f, angleType=%s}", value, angleType);
+        return formatter.toString().replaceFirst(",", ".");
     }
 }
