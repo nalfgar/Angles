@@ -2,6 +2,7 @@ package pl.strojecki;
 
 import lombok.ToString;
 
+
 import static java.lang.Double.parseDouble;
 
 @ToString
@@ -16,7 +17,7 @@ public class Angle {
         this.inputString = inputString;
         this.angleType = angleType;
 
-        if (angleType == AngleType.GRAD) {
+        if (angleType == AngleType.GRAD || angleType == AngleType.RAD) {
             inputString = inputString.replace(',','.');
             value = parseDouble(inputString);
         }
@@ -30,8 +31,18 @@ public class Angle {
         while (value < 0.0) {
             value += angleType.getMaxValue();
         }
-
         return value;
     }
 
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public AngleType getAngleType() {
+        return angleType;
+    }
 }
