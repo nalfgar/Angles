@@ -1,0 +1,1 @@
+1. Modify equals() method in Angle to suuport comparsions double value with delta.
