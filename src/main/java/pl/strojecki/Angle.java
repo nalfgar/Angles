@@ -1,10 +1,16 @@
 package pl.strojecki;
 
 import java.util.Formatter;
+import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
+import static java.lang.Math.*;
 
 public class Angle {
+
+    private static final double DOUBLE_DELTA = 0.0000001;
+    public static final double GRAD_2_RAD = PI / 200.0;
+
 
     private String inputString;
     private double value;
@@ -23,6 +29,17 @@ public class Angle {
         if (angleType == AngleType.DMS){
             this.angleType = AngleType.DD;
             value = normalizeAngle(dms2dd(inputString), this.angleType);
+        }
+    }
+
+    public Angle(double input, AngleType angleType) {
+        this.angleType = angleType;
+
+        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DD) {
+            this.value = normalizeAngle(input, this.angleType);
+        }
+        if (angleType == AngleType.DMS){
+            throw new IllegalArgumentException("If value == double, angleType can be [GRAD|RAD|DD]");
         }
     }
 
@@ -60,9 +77,27 @@ public class Angle {
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Angle)) return false;
+        Angle angle = (Angle) o;
+        return Math.abs(angle.getValue() - getValue()) < DOUBLE_DELTA &&
+                getAngleType() == angle.getAngleType();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue(), getAngleType());
+    }
+
+    @Override
     public String toString() {
         Formatter formatter = new Formatter();
-        formatter.format("Angle{value=%.4f, angleType=%s}", value, angleType);
+        formatter.format("Angle{value=%.14f, angleType=%s}", value, angleType);
         return formatter.toString().replaceFirst(",", ".");
+    }
+
+    public double toRadians() {
+        return this.value * GRAD_2_RAD;
     }
 }
