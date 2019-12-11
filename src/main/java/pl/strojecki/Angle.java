@@ -8,8 +8,10 @@ import static java.lang.Math.*;
 
 public class Angle {
 
-    private static final double DOUBLE_DELTA = 0.000001;
-    public static final double GRAD_2_RAD = PI / 200.0;
+    private static final double DOUBLE_DELTA_RAD =  0.00000001;
+    private static final double DOUBLE_DELTA_GRAD = 0.00001;
+    private static final double GRAD_2_RAD = PI / 200.0;
+    private static final double RAD_2_GRAD = 200 / PI;
 
 
     private String inputString;
@@ -81,8 +83,11 @@ public class Angle {
         if (this == o) return true;
         if (!(o instanceof Angle)) return false;
         Angle angle = (Angle) o;
-        return Math.abs(angle.getValue() - getValue()) < DOUBLE_DELTA &&
-                getAngleType() == angle.getAngleType();
+        if (this.angleType == angleType.RAD) {
+            return Math.abs(angle.getValue() - getValue()) < DOUBLE_DELTA_RAD &&
+                    getAngleType() == angle.getAngleType();
+        } else {return Math.abs(angle.getValue() - getValue()) < DOUBLE_DELTA_GRAD &&
+                getAngleType() == angle.getAngleType();}
     }
 
     @Override
@@ -99,5 +104,9 @@ public class Angle {
 
     public double toRadians() {
         return this.value * GRAD_2_RAD;
+    }
+
+    public double toGradians() {
+        return this.value * RAD_2_GRAD;
     }
 }

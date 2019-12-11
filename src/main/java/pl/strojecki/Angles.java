@@ -1,8 +1,5 @@
 package pl.strojecki;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Angles {
 
     public static double a;
@@ -10,8 +7,10 @@ public class Angles {
 
     public static void main(String[] args) {
 
-        Angle angle1 = new Angle("0.00011", AngleType.GRAD);
+        Angle angle6 = new Angle("3.141592", AngleType.RAD);
+        Angle angle7 = new Angle("3.1415926", AngleType.RAD);
 
-        System.out.println(angle1.toRadians());
+        System.out.println(angle6.toGradians());
+        System.out.println(angle7.toGradians());
     }
 }

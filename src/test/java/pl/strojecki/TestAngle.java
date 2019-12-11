@@ -17,7 +17,7 @@ public class TestAngle {
     public static final double TWO_PI = PI * 2.0;
 
     public static final double DELTA_GRAD = 0.00001;
-    public static final double DELTA_RAD = 0.0000001;
+    public static final double DELTA_RAD =  0.0000001;
 
     private static Angle anglePi;
     private static Angle angleHalfPi;
@@ -53,21 +53,29 @@ public class TestAngle {
     @Test
     @DisplayName("correct compare two Angles")
     public void testCompareAngles() {
-
-        assertEquals(anglePi, new Angle("3.141592", RAD));
-        assertEquals(anglePi, new Angle("3,141592", RAD));
-
+        assertEquals(anglePi, new Angle("3.14159265", RAD));
+        assertEquals(anglePi, new Angle("3,14159265", RAD));
+        assertEquals(anglePi, new Angle(3.14159265, RAD));
     }
 
     @Test
     @DisplayName("convert gradians to radians")
-    public void test(){
+    public void testConvertGradiansToRadian(){
         assertEquals(0.0, new Angle("0.0", AngleType.GRAD).toRadians(), DELTA_RAD);
         assertEquals(0.0000015708, new Angle("0.0001", AngleType.GRAD).toRadians(), DELTA_RAD);
         assertEquals(HALF_PI, new Angle("100.0", AngleType.GRAD).toRadians(), DELTA_RAD);
         assertEquals(PI, new Angle("200.0", AngleType.GRAD).toRadians(), DELTA_RAD);
         assertEquals(0.0, new Angle("400.0", AngleType.GRAD).toRadians(), DELTA_RAD);
     }
+
+    @Test
+    @DisplayName("convert rdadians to gradnians")
+    public void testConvertRadiansToGradians(){
+        assertEquals(0.0, new Angle("0.0", AngleType.RAD).toGradians(), DELTA_GRAD);
+        assertEquals(0.00010, new Angle("0.00000157", AngleType.RAD).toGradians(), DELTA_GRAD);
+        assertEquals(200.0, new Angle("3.1415926", AngleType.RAD).toGradians(), DELTA_GRAD);
+    }
+
 
 
     @Test
