@@ -10,8 +10,8 @@ public class Angles {
 
     public static void main(String[] args) {
 
-        Angle angle1 = new Angle("234.3324", AngleType.GRAD);
+        Angle angle1 = new Angle("0.00011", AngleType.GRAD);
 
-        System.out.println(angle1);
+        System.out.println(angle1.toRadians());
     }
 }

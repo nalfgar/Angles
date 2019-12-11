@@ -8,7 +8,7 @@ import static java.lang.Math.*;
 
 public class Angle {
 
-    private static final double DOUBLE_DELTA = 0.0000001;
+    private static final double DOUBLE_DELTA = 0.000001;
     public static final double GRAD_2_RAD = PI / 200.0;
 
 

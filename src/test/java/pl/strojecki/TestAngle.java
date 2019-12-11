@@ -4,9 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.logging.Logger;
-
 import static java.lang.Math.PI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -65,11 +62,11 @@ public class TestAngle {
     @Test
     @DisplayName("convert gradians to radians")
     public void test(){
+        assertEquals(0.0, new Angle("0.0", AngleType.GRAD).toRadians(), DELTA_RAD);
+        assertEquals(0.0000015708, new Angle("0.0001", AngleType.GRAD).toRadians(), DELTA_RAD);
         assertEquals(HALF_PI, new Angle("100.0", AngleType.GRAD).toRadians(), DELTA_RAD);
         assertEquals(PI, new Angle("200.0", AngleType.GRAD).toRadians(), DELTA_RAD);
-//        TODO fix below test
-//        assertEquals(TWO_PI, new Angle("400.0", AngleType.GRAD).toRadians(), DELTA_RAD);
-
+        assertEquals(0.0, new Angle("400.0", AngleType.GRAD).toRadians(), DELTA_RAD);
     }
 
 
