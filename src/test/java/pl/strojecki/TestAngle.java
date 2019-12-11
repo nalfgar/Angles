@@ -47,7 +47,7 @@ public class TestAngle {
     }
 
     @Test
-    @DisplayName("throw exception when value is double and angleType == DMS")
+    @DisplayName("throws exception when value is double and angleType == DMS")
     public void testCreateDMS() throws Exception{
 
         assertThrows(IllegalArgumentException.class, () -> new Angle(1.3141592954, DMS));
