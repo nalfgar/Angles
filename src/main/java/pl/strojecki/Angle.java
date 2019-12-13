@@ -120,5 +120,17 @@ public class Angle {
         }
         return 0;
     }
+    public double toGrad() {
+        if (this.angleType == GRAD){
+            return this.angle;
+        } else if (this.angleType == RAD){
+            return this.angle * RAD_2_GRAD;
+        } else if (this.angleType == DEG){
+            return this.angle * DEG_2_GRAD;
+        }
+        return 0;
+    }
 
+
+    }
 }
