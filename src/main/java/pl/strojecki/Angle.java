@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Math.*;
+import static pl.strojecki.AngleType.*;
 
 public class Angle {
 
@@ -18,11 +19,11 @@ public class Angle {
     private static final double RAD_2_DEG = 180.0 / PI;
 
     private static final double GRAD_2_DEG = 360.0 / 400.0;
-    private static final double DEG_2_GRAD = 400.0 / 300.0;
+    private static final double DEG_2_GRAD = 400.0 / 360.0;
 
 
     private String inputString;
-    private double value;
+    private double angle;
     private AngleType angleType;
 
 
@@ -30,24 +31,24 @@ public class Angle {
         this.inputString = inputString;
         this.angleType = angleType;
 
-        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DEG) {
+        if (angleType == GRAD || angleType == RAD || angleType == DEG) {
             inputString = inputString.replace(',','.');
-            value = parseDouble(inputString);
-            value = normalizeAngle(value, this.angleType);
+            angle = parseDouble(inputString);
+            angle = normalizeAngle(angle, this.angleType);
         }
-        if (angleType == AngleType.DMS){
-            this.angleType = AngleType.DEG;
-            value = normalizeAngle(dms2dd(inputString), this.angleType);
+        if (angleType == DMS){
+            this.angleType = DEG;
+            angle = normalizeAngle(dms2dd(inputString), this.angleType);
         }
     }
 
     public Angle(double input, AngleType angleType) {
         this.angleType = angleType;
 
-        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DEG) {
-            this.value = normalizeAngle(input, this.angleType);
+        if (angleType == GRAD || angleType == RAD || angleType == DEG) {
+            this.angle = normalizeAngle(input, this.angleType);
         }
-        if (angleType == AngleType.DMS){
+        if (angleType == DMS){
             throw new IllegalArgumentException("If value == double, angleType can be [GRAD|RAD|DD]");
         }
     }
@@ -72,12 +73,12 @@ public class Angle {
         return value;
     }
 
-    public double getValue() {
-        return value;
+    public double getAngle() {
+        return angle;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setAngle(double angle) {
+        this.angle = angle;
     }
 
     public AngleType getAngleType() {
@@ -90,34 +91,34 @@ public class Angle {
         if (this == o) return true;
         if (!(o instanceof Angle)) return false;
         Angle angle = (Angle) o;
-        if (this.angleType == angleType.RAD) {
-            return Math.abs(angle.getValue() - getValue()) < DOUBLE_DELTA_RAD &&
+        if (this.angleType == RAD) {
+            return abs(angle.getAngle() - getAngle()) < DOUBLE_DELTA_RAD &&
                     getAngleType() == angle.getAngleType();
-        } else {return Math.abs(angle.getValue() - getValue()) < DOUBLE_DELTA_GRAD &&
+        } else {return abs(angle.getAngle() - getAngle()) < DOUBLE_DELTA_GRAD &&
                 getAngleType() == angle.getAngleType();}
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getValue(), getAngleType());
+        return Objects.hash(getAngle(), getAngleType());
     }
 
     @Override
     public String toString() {
         Formatter formatter = new Formatter();
-        formatter.format("Angle{value=%.14f, angleType=%s}", value, angleType);
+        formatter.format("Angle{angle=%.14f, angleType=%s}", angle, angleType);
         return formatter.toString().replaceFirst(",", ".");
     }
 
     public double toRad() {
-        return this.value * GRAD_2_RAD;
+        if (this.angleType == RAD){
+            return this.angle;
+        } else if (this.angleType == GRAD){
+            return this.angle * GRAD_2_RAD;
+        } else if (this.angleType == DEG){
+            return this.angle * DEG_2_RAD;
+        }
+        return 0;
     }
 
-    public double toGrad() {
-        return this.value * RAD_2_GRAD;
-    }
-
-    public double toDeg() {
-        return this.value * RAD_2_DEG;
-    }
 }

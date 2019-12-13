@@ -95,40 +95,40 @@ public class AngleTest {
     public void testCreateAngleGradians() throws Exception {
         double expectedValue = 100.00001;
 
-        assertEquals(expectedValue, new Angle("100.00001", AngleType.GRAD).getValue(), DELTA_GRAD);
-        assertEquals(expectedValue, new Angle("100,00001", AngleType.GRAD).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("100.00001", AngleType.GRAD).getAngle(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("100,00001", AngleType.GRAD).getAngle(), DELTA_GRAD);
 
-        assertEquals(expectedValue, new Angle("1300.00001", AngleType.GRAD).getValue(), DELTA_GRAD);
-        assertEquals(expectedValue, new Angle("1300,00001", AngleType.GRAD).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("1300.00001", AngleType.GRAD).getAngle(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("1300,00001", AngleType.GRAD).getAngle(), DELTA_GRAD);
 
         expectedValue = 300.00000;
-        assertEquals(expectedValue, new Angle("-100.0000", AngleType.GRAD).getValue(), DELTA_RAD);
+        assertEquals(expectedValue, new Angle("-100.0000", AngleType.GRAD).getAngle(), DELTA_RAD);
     }
 
     @Test
     @DisplayName("create correct angle in decimal degrees")
     public void testCreateAngleDecimalDegrees() throws Exception {
         double expectedValue = 180.00001;
-        assertEquals(expectedValue, new Angle("180.00001", AngleType.DEG).getValue(), DELTA_GRAD);
-        assertEquals(expectedValue, new Angle("180,00001", AngleType.DEG).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("180.00001", AngleType.DEG).getAngle(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("180,00001", AngleType.DEG).getAngle(), DELTA_GRAD);
 
-        assertEquals(expectedValue, new Angle("2700.00001", AngleType.DEG).getValue(), DELTA_GRAD);
-        assertEquals(expectedValue, new Angle("2700,00001", AngleType.DEG).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("2700.00001", AngleType.DEG).getAngle(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("2700,00001", AngleType.DEG).getAngle(), DELTA_GRAD);
 
         expectedValue = 270.00000;
-        assertEquals(expectedValue, new Angle("-90.0000", AngleType.DEG).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("-90.0000", AngleType.DEG).getAngle(), DELTA_GRAD);
     }
 
     @Test
     @DisplayName("create correct angle in DMS")
     public void testCreateAngleDegreesMinutesSeconds() throws Exception {
         double expectedValue = 1.0169444444444444;
-        assertEquals(expectedValue, new Angle("1 1 1", AngleType.DMS).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("1 1 1", AngleType.DMS).getAngle(), DELTA_GRAD);
         expectedValue = 10.169444444444444;
-        assertEquals(expectedValue, new Angle("10 10 10", AngleType.DMS).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("10 10 10", AngleType.DMS).getAngle(), DELTA_GRAD);
 
         expectedValue = 59.999722222222225;
-        assertEquals(expectedValue, new Angle("59 59 59", AngleType.DMS).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("59 59 59", AngleType.DMS).getAngle(), DELTA_GRAD);
 
     }
 }
