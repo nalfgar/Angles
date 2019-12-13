@@ -10,8 +10,15 @@ public class Angle {
 
     private static final double DOUBLE_DELTA_RAD =  0.00000001;
     private static final double DOUBLE_DELTA_GRAD = 0.00001;
+
     private static final double GRAD_2_RAD = PI / 200.0;
     private static final double RAD_2_GRAD = 200 / PI;
+
+    private static final double DD_2_RAD = PI / 180.0;
+    private static final double RAD_2_DD = 180.0 / PI;
+
+    private static final double GRAD_2_DD = 360.0 / 400.0;
+    private static final double DD_2_GRAD = 400.0 / 300.0;
 
 
     private String inputString;

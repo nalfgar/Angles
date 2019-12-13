@@ -4,14 +4,20 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.Math.PI;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static java.lang.Math.PI;
+
 import static pl.strojecki.AngleType.DMS;
 import static pl.strojecki.AngleType.RAD;
 
 @DisplayName("Angle should")
-public class TestAngle {
+public class AngleTest {
+// given
+// when
+// then
 
     public static final double HALF_PI = PI / 2.0;
     public static final double TWO_PI = PI * 2.0;
@@ -19,27 +25,33 @@ public class TestAngle {
     public static final double DELTA_GRAD = 0.00001;
     public static final double DELTA_RAD =  0.0000001;
 
-    private static Angle anglePi;
-    private static Angle angleHalfPi;
+    private static Angle anglePiRad;
+    private static Angle angleHalfPiRad;
 
 
     @BeforeAll
     public static void setup(){
-        anglePi = new Angle(String.valueOf(PI), RAD);
-        angleHalfPi = new Angle(String.valueOf(PI/2.0), RAD);
+        anglePiRad = new Angle(String.valueOf(PI), RAD);
+        angleHalfPiRad = new Angle(String.valueOf(PI/2.0), RAD);
     }
 
     @Test
     @DisplayName("create correct angle in radians")
     public void testCreateAngleRadians() throws Exception {
 
-        assertEquals(angleHalfPi, new Angle("1.570796327", RAD));
-        assertEquals(angleHalfPi, new Angle("1,570796327", RAD));
-        assertEquals(angleHalfPi, new Angle(1.570796327, RAD));
+//        given
+        Angle newAngleHalfPiRad = new Angle("1.570796327", RAD);
+//        when
+//        then
+        assertThat(newAngleHalfPiRad).isEqualTo(angleHalfPiRad);
 
-        assertEquals(anglePi, new Angle("3.141592654", RAD));
-        assertEquals(anglePi, new Angle("3,141592654", RAD));
-        assertEquals(anglePi, new Angle(3.141592654, RAD));
+//        assertEquals(angleHalfPi, new Angle("1.570796327", RAD));
+//        assertEquals(angleHalfPi, new Angle("1,570796327", RAD));
+//        assertEquals(angleHalfPi, new Angle(1.570796327, RAD));
+//
+//        assertEquals(anglePi, new Angle("3.141592654", RAD));
+//        assertEquals(anglePi, new Angle("3,141592654", RAD));
+//        assertEquals(anglePi, new Angle(3.141592654, RAD));
 
     }
 
@@ -53,9 +65,9 @@ public class TestAngle {
     @Test
     @DisplayName("correct compare two Angles")
     public void testCompareAngles() {
-        assertEquals(anglePi, new Angle("3.14159265", RAD));
-        assertEquals(anglePi, new Angle("3,14159265", RAD));
-        assertEquals(anglePi, new Angle(3.14159265, RAD));
+        assertEquals(anglePiRad, new Angle("3.14159265", RAD));
+        assertEquals(anglePiRad, new Angle("3,14159265", RAD));
+        assertEquals(anglePiRad, new Angle(3.14159265, RAD));
     }
 
     @Test
