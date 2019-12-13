@@ -14,11 +14,11 @@ public class Angle {
     private static final double GRAD_2_RAD = PI / 200.0;
     private static final double RAD_2_GRAD = 200 / PI;
 
-    private static final double DD_2_RAD = PI / 180.0;
-    private static final double RAD_2_DD = 180.0 / PI;
+    private static final double DEG_2_RAD = PI / 180.0;
+    private static final double RAD_2_DEG = 180.0 / PI;
 
-    private static final double GRAD_2_DD = 360.0 / 400.0;
-    private static final double DD_2_GRAD = 400.0 / 300.0;
+    private static final double GRAD_2_DEG = 360.0 / 400.0;
+    private static final double DEG_2_GRAD = 400.0 / 300.0;
 
 
     private String inputString;
@@ -30,13 +30,13 @@ public class Angle {
         this.inputString = inputString;
         this.angleType = angleType;
 
-        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DD) {
+        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DEG) {
             inputString = inputString.replace(',','.');
             value = parseDouble(inputString);
             value = normalizeAngle(value, this.angleType);
         }
         if (angleType == AngleType.DMS){
-            this.angleType = AngleType.DD;
+            this.angleType = AngleType.DEG;
             value = normalizeAngle(dms2dd(inputString), this.angleType);
         }
     }
@@ -44,7 +44,7 @@ public class Angle {
     public Angle(double input, AngleType angleType) {
         this.angleType = angleType;
 
-        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DD) {
+        if (angleType == AngleType.GRAD || angleType == AngleType.RAD || angleType == AngleType.DEG) {
             this.value = normalizeAngle(input, this.angleType);
         }
         if (angleType == AngleType.DMS){
@@ -63,11 +63,11 @@ public class Angle {
     }
 
     private double normalizeAngle(double value, AngleType angleType) {
-        while (value >= angleType.getMaxValue()) {
-            value -= angleType.getMaxValue();
+        while (value >= angleType.getFullAngle()) {
+            value -= angleType.getFullAngle();
         }
         while (value < 0.0) {
-            value += angleType.getMaxValue();
+            value += angleType.getFullAngle();
         }
         return value;
     }
@@ -109,11 +109,15 @@ public class Angle {
         return formatter.toString().replaceFirst(",", ".");
     }
 
-    public double toRadians() {
+    public double toRad() {
         return this.value * GRAD_2_RAD;
     }
 
-    public double toGradians() {
+    public double toGrad() {
         return this.value * RAD_2_GRAD;
+    }
+
+    public double toDeg() {
+        return this.value * RAD_2_DEG;
     }
 }

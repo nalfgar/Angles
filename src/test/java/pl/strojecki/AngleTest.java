@@ -73,19 +73,19 @@ public class AngleTest {
     @Test
     @DisplayName("convert gradians to radians")
     public void testConvertGradiansToRadian(){
-        assertEquals(0.0, new Angle("0.0", AngleType.GRAD).toRadians(), DELTA_RAD);
-        assertEquals(0.0000015708, new Angle("0.0001", AngleType.GRAD).toRadians(), DELTA_RAD);
-        assertEquals(HALF_PI, new Angle("100.0", AngleType.GRAD).toRadians(), DELTA_RAD);
-        assertEquals(PI, new Angle("200.0", AngleType.GRAD).toRadians(), DELTA_RAD);
-        assertEquals(0.0, new Angle("400.0", AngleType.GRAD).toRadians(), DELTA_RAD);
+        assertEquals(0.0, new Angle("0.0", AngleType.GRAD).toRad(), DELTA_RAD);
+        assertEquals(0.0000015708, new Angle("0.0001", AngleType.GRAD).toRad(), DELTA_RAD);
+        assertEquals(HALF_PI, new Angle("100.0", AngleType.GRAD).toRad(), DELTA_RAD);
+        assertEquals(PI, new Angle("200.0", AngleType.GRAD).toRad(), DELTA_RAD);
+        assertEquals(0.0, new Angle("400.0", AngleType.GRAD).toRad(), DELTA_RAD);
     }
 
     @Test
     @DisplayName("convert rdadians to gradnians")
     public void testConvertRadiansToGradians(){
-        assertEquals(0.0, new Angle("0.0", AngleType.RAD).toGradians(), DELTA_GRAD);
-        assertEquals(0.00010, new Angle("0.00000157", AngleType.RAD).toGradians(), DELTA_GRAD);
-        assertEquals(200.0, new Angle("3.1415926", AngleType.RAD).toGradians(), DELTA_GRAD);
+        assertEquals(0.0, new Angle("0.0", AngleType.RAD).toGrad(), DELTA_GRAD);
+        assertEquals(0.00010, new Angle("0.00000157", AngleType.RAD).toGrad(), DELTA_GRAD);
+        assertEquals(200.0, new Angle("3.1415926", AngleType.RAD).toGrad(), DELTA_GRAD);
     }
 
 
@@ -109,14 +109,14 @@ public class AngleTest {
     @DisplayName("create correct angle in decimal degrees")
     public void testCreateAngleDecimalDegrees() throws Exception {
         double expectedValue = 180.00001;
-        assertEquals(expectedValue, new Angle("180.00001", AngleType.DD).getValue(), DELTA_GRAD);
-        assertEquals(expectedValue, new Angle("180,00001", AngleType.DD).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("180.00001", AngleType.DEG).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("180,00001", AngleType.DEG).getValue(), DELTA_GRAD);
 
-        assertEquals(expectedValue, new Angle("2700.00001", AngleType.DD).getValue(), DELTA_GRAD);
-        assertEquals(expectedValue, new Angle("2700,00001", AngleType.DD).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("2700.00001", AngleType.DEG).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("2700,00001", AngleType.DEG).getValue(), DELTA_GRAD);
 
         expectedValue = 270.00000;
-        assertEquals(expectedValue, new Angle("-90.0000", AngleType.DD).getValue(), DELTA_GRAD);
+        assertEquals(expectedValue, new Angle("-90.0000", AngleType.DEG).getValue(), DELTA_GRAD);
     }
 
     @Test

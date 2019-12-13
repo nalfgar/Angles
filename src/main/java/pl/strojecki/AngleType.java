@@ -5,24 +5,25 @@ import static java.lang.Math.*;
 /**
  * Enum represents type of angle.
  *
- * DD  - Decimal Degrees
+ * DEG - Decimal Degrees
  * DMS - Degrees, Minutes, Seconds
  * RAD - Radians
  * GRAD - gradians (gons)
  * */
 public enum AngleType {
-    DD(360.0),
+
+    DEG(360.0),
     DMS(360.0),
     RAD(2 * PI),
     GRAD(400.0);
 
-    private final double maxValue;
+    private final double fullAngle;
 
-    AngleType(double maxValue) {
-        this.maxValue = maxValue;
+    AngleType(double fullAngle) {
+        this.fullAngle = fullAngle;
     }
 
-    public double getMaxValue() {
-        return maxValue;
+    public double getFullAngle() {
+        return fullAngle;
     }
 }
